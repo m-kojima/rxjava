@@ -16,17 +16,15 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
     }
 
-    class SecondActivityFunc: Consumer<Boolean> {
-        override fun accept(t: Boolean?) {
-            println(t.toString())
-        }
-    }
-
     override fun onStart() {
         super.onStart()
 
         val switchChanged = RxCompoundButton.checkedChanges(activity2_switch).share()
-        this.disposeBag.add(switchChanged.subscribe(SecondActivityFunc()))
+        this.disposeBag.add(switchChanged.subscribe(object: Consumer<Boolean> {
+            override fun accept(t: Boolean?) {
+                println(t.toString())
+            }
+        }))
     }
 
     override fun onStop() {
