@@ -19,7 +19,7 @@ class SecondActivity : AppCompatActivity() {
         super.onStart()
 
         val switchChanged = RxCompoundButton.checkedChanges(activity2_switch).share()
-        this.disposeBag.add(switchChanged.subscribe { println(it.toString()) })
+        this.disposeBag.add(switchChanged.subscribe { println(it.toString() + this.toString()) })
     }
 
     override fun onStop() {
