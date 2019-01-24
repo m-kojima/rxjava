@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.jakewharton.rxbinding2.widget.RxCompoundButton
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondActivity : AppCompatActivity() {
@@ -20,11 +19,7 @@ class SecondActivity : AppCompatActivity() {
         super.onStart()
 
         val switchChanged = RxCompoundButton.checkedChanges(activity2_switch).share()
-        this.disposeBag.add(switchChanged.subscribe(object: Consumer<Boolean> {
-            override fun accept(t: Boolean?) {
-                println(t.toString())
-            }
-        }))
+        this.disposeBag.add(switchChanged.subscribe { println(it.toString()) })
     }
 
     override fun onStop() {
