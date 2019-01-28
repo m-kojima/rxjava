@@ -33,7 +33,6 @@ class SecondViewModel {
             .subscribe { this.start() }
             .disposed(by = this.disposeBag)
 
-
         this.onStopSubject
             .subscribe { this.stop() }
             .disposed(by = this.disposeBag)
@@ -58,7 +57,7 @@ class SecondViewModel {
         }
 
         fun stop() {
-            this.cancel()
+            this.timer.cancel()
         }
 
         override fun run() {
